@@ -105,7 +105,7 @@ class testFileStorage(unittest.TestCase):
         try:
             self.storage.reload()
             self.assertTrue(True)
-        except Exception:
+        except Exception as ex:
             self.assertTrue(False)
 
     def test_parameter_validity(self):
