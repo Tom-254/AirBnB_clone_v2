@@ -1,17 +1,31 @@
 #!/usr/bin/python3
-"""This is the review class"""
-from models.base_model import BaseModel, Base, Column, String
+"""This is the state class"""
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
-from sqlalchemy import ForeignKey
+import os
+import models
+from models.city import City
 
 
-class Review(BaseModel, Base):
-    """This is the class for Review"""
-    __tablename__ = 'reviews'
+class State(BaseModel, Base):
+    '''
+        Implementation for the State.
+    '''
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        __tablename__ = "states"
+        name = Column(String(128), nullable=False)
+        cities = relationship("City", backref="state",
+                              cascade="delete")
+    else:
+        name = ""
 
-    text = Column(String(1024), nullable=False)
-    place_id = Column(String(60), ForeignKey('places.id'), nullable=False)
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-
-    user = relationship('User', back_populates='reviews')
-    place = relationship('Place', back_populates='reviews')
+        @property
+        def cities(self):
+            city_dict = models.storage.all(City)
+            state_query = self.id
+            city_list = []
+            for k, v in city_dict.items():
+                if v.state_id == self.id:
+                    city_list.append(v)
+            return 
