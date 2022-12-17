@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         try:
-            args = re.split("\s|=", args)
+            args = re.split(r"\s|=", args)
             new_instance = eval(args[0])()
 
             for idx in range(1, len(args), 2):
@@ -59,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
                     value = value.replace("\"", "")
                 elif "." in value:
                     value = float(value)
-                elif re.search("\d.*", value) is not None:
+                elif re.search(r"\d.*", value) is not None:
                     value = int(value)
                 else:
                     continue
@@ -236,7 +236,7 @@ class HBNBCommand(cmd.Cmd):
             cmd_arg = args[0] + " " + args[2]
             func = functions[args[1]]
             func(cmd_arg)
-        except:
+        except Exception as ex:
             print("*** Unknown syntax:", args[0])
 
 
