@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" pack and deploy to the remote hosts"""
 import os
 from datetime import datetime
 from fabric.api import *
