@@ -4,7 +4,7 @@ from datetime import datetime
 from fabric.api import *
 
 
-env.hosts = ['34.201.165.150', '100.26.121.251']
+env.hosts = ['34.239.246.45', '54.165.80.30']
 
 
 def do_pack():
@@ -65,3 +65,4 @@ def do_deploy(archive_path):
     if result.failed:
         return False
     return True
+    
