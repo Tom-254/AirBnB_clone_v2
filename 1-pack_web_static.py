@@ -5,9 +5,9 @@ from fabric.api import *
 
 
 def do_pack():
-    '''
+    """
         Creating an archive with the file in web_static folder
-    '''
+    """
     now = datetime.now()
     filename = "versions/web_static_{}{}{}{}{}{}.tgz".format(now.year,
                                                              now.month,

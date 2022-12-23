@@ -8,9 +8,9 @@ env.hosts = ['34.201.165.150', '100.26.121.251']
 
 
 def do_pack():
-    '''
+    """
         Creating an archive with the file in web_static folder
-    '''
+    """
     now = datetime.now()
     filename = "versions/web_static_{}{}{}{}{}{}.tgz".format(now.year,
                                                              now.month,
@@ -28,9 +28,9 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    '''
+    """
         Deploys an archive to the web servers
-    '''
+    """
     name = archive_path.split("/")[1]
     if not os.path.exists(archive_path):
         return False
@@ -68,9 +68,9 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    '''
+    """
         Interface for set-up functions
-    '''
+    """
     path = do_pack()
     if path is None:
         return False
