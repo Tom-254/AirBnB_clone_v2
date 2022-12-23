@@ -40,8 +40,8 @@ def do_deploy(archive_path):
 
 def do_deploy(archive_path):
     """Deploys the static files to the host servers.
-    Args:
-        archive_path (str): The path to the archived static files.
+        Args:
+            archive_path (str): The path to the archived static files.
     """
     if not os.path.exists(archive_path):
         return False
