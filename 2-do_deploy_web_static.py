@@ -5,6 +5,7 @@ import os
 
 env.hosts = ['34.201.165.150', '100.26.121.251']
 
+
 def do_pack():
     """do pack"""
     time = datetime.datetime.now()
@@ -14,7 +15,7 @@ def do_pack():
         local("mkdir -p versions")
         local("tar -cvzf versions/web_static_{}.tgz ./web_static".format(date))
         return "./versions/web_static_{}.tgz".format(date)
-    except:
+    except Exception as ex:
         return None
 
 
@@ -34,5 +35,5 @@ def do_deploy(archive_path):
         run("mv {}/web_static/* {}".format(rmt_path, rmt_path))
         run("rm -d {}/web_static/".format(rmt_path))
         return True
-    except:
+    except Exception as ex:
         return False
