@@ -10,6 +10,7 @@ env.hosts = ['34.201.165.150', '100.26.121.251']
 
 env.user = "ubuntu"
 
+
 def do_deploy(archive_path):
     """Deploys the static files to the host servers.
         Args:
