@@ -1,67 +1,38 @@
 #!/usr/bin/python3
+from fabric.api import run, local, put, env
+import datetime
 import os
-from datetime import datetime
-from fabric.api import *
-
 
 env.hosts = ['34.201.165.150', '100.26.121.251']
 
-
 def do_pack():
-    '''
-        Creating an archive with the file in web_static folder
-    '''
-    now = datetime.now()
-    filename = "versions/web_static_{}{}{}{}{}{}.tgz".format(now.year,
-                                                             now.month,
-                                                             now.day,
-                                                             now.hour,
-                                                             now.minute,
-                                                             now.second)
-    print("Packing web_static to versions/{}".format(filename))
-    local("mkdir -p versions")
-    result = local("tar -vczf {} web_static".format(filename))
-    if result.succeeded:
-        return (filename)
-    else:
+    """do pack"""
+    time = datetime.datetime.now()
+    date = (str(time.year) + str(time.month) + str(time.day) + str(time.hour) +
+            str(time.minute) + str(time.second))
+    try:
+        local("mkdir -p versions")
+        local("tar -cvzf versions/web_static_{}.tgz ./web_static".format(date))
+        return "./versions/web_static_{}.tgz".format(date)
+    except:
         return None
 
 
 def do_deploy(archive_path):
-    '''
-        Deploys an archive to the web servers
-    '''
-    name = archive_path.split("/")[1]
-    if not os.path.exists(archive_path):
+    if os.path.exists(archive_path) is False:
         return False
-
-    result = put(archive_path, "/tmp/")
-    if result.failed:
+    try:
+        upload = put(archive_path, "/tmp/")
+        name = archive_path[9:-4]
+        rmt_path = "/data/web_static/releases/" + name
+        run("mkdir {}".format(rmt_path))
+        run("tar -xvzf /tmp/{}.tgz --directory {}/".format(name, rmt_path))
+        run("rm /tmp/{}.tgz".format(name))
+        run("rm /data/web_static/current")
+        run("ln -nsf /data/web_static/releases/{} /data/web_static/current"
+            .format(name))
+        run("mv {}/web_static/* {}".format(rmt_path, rmt_path))
+        run("rm -d {}/web_static/".format(rmt_path))
+        return True
+    except:
         return False
-
-    run("mkdir -p /data/web_static/releases/{}".format(name[:-4]))
-
-    cmd = "tar -xzf /tmp/{} -C /data/web_static/releases/{}".format(name,
-                                                                    name[:-4])
-    result = run(cmd)
-    if result.failed:
-        return False
-
-    result = run("rm /tmp/{}".format(name))
-    if result.failed:
-        return False
-
-    run("cp -rp /data/web_static/releases/{}/web_static/*\
-        /data/web_static/releases/{}/".format(name[:-4], name[:-4]))
-
-    run("rm -rf /data/web_static/releases/{}/web_static/".format(name[:-4]))
-    result = run("rm /data/web_static/current")
-    if result.failed:
-        return False
-
-    path = "/data/web_static/releases/{}".format(name[:-4])
-    cmd = "ln -sf {} /data/web_static/current".format(path)
-    result = run(cmd)
-    if result.failed:
-        return False
-    return True
