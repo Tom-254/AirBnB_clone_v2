@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Returns Cities when route is accessed
+"""
 from flask import Flask, render_template
 from models import storage
 
@@ -7,11 +9,15 @@ app = Flask(__name__)
 
 @app.teardown_appcontext
 def teardown(exceptions):
+    """Perfoms Clean up
+    """
     storage.close()
 
 
 @app.route("/cities_by_states", strict_slashes=False)
 def cities_by_states():
+    """Returns Cities when route is accessed
+    """
     state_obj = storage.all("State")
     city_obj = storage.all("City")
     return render_template("8-cities_by_states.html",

@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Falsk application creates several routes
+"""
 from flask import Flask
 
 
@@ -7,6 +9,8 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def hello():
+    """Flask application that Returns Hello HBNB!
+    """
     return ("Hello HBNB!")
 
 

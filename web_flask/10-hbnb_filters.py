@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Returns States Cities and Amenities when route is accessed
+"""
 from flask import Flask, render_template
 from models import storage
 
@@ -7,11 +9,15 @@ app = Flask(__name__)
 
 @app.teardown_appcontext
 def teardown(exceptions):
+    """Perfoms Clean up
+    """
     storage.close()
 
 
 @app.route("/hbnb_filters", strict_slashes=False)
 def display_filters():
+    """Returns States Cities and Amenities when route is accessed
+    """
     state_obj = storage.all("State")
     city_obj = storage.all("City")
     amts_obj = storage.all("Amenity")

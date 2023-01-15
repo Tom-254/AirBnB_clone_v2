@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Returns States and Cities when route is accessed
+"""
 from flask import Flask, render_template
 from models import storage
 
@@ -7,12 +9,16 @@ app = Flask(__name__)
 
 @app.teardown_appcontext
 def teardown(exceptions):
+    """Perfoms Clean up
+    """
     storage.close()
 
 
 @app.route("/states", strict_slashes=False)
 @app.route("/states/<id>", strict_slashes=False)
 def show_states(id=None):
+    """Returns States and Cities when route is accessed
+    """
     state_obj = storage.all("State")
     city_obj = storage.all("City")
 
