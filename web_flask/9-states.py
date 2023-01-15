@@ -20,9 +20,10 @@ def show_states(id=None):
     if id is not None and state_id not in state_obj:
         states = None
     return render_template("9-states.html",
-            states=[value  for value in state_obj.values()],
-            cities=[value  for value in city_obj.values()],
+                           states=[value for value in state_obj.values()],
+                           cities=[value for value in city_obj.values()],
                            id=id)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

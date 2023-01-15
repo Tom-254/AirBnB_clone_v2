@@ -15,9 +15,9 @@ def cities_by_states():
     state_obj = storage.all("State")
     city_obj = storage.all("City")
     return render_template("8-cities_by_states.html",
-            states=[value  for value in state_obj.values()],
-            cities=[value  for value in city_obj.values()])
+                           states=[value for value in state_obj.values()],
+                           cities=[value for value in city_obj.values()])
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-    

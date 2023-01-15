@@ -9,6 +9,7 @@ app = Flask(__name__)
 def teardown(exceptions):
     storage.close()
 
+
 @app.route("/hbnb", strict_slashes=False)
 def display_filters():
     states = storage.all("State")
@@ -21,6 +22,7 @@ def display_filters():
                            cities=cities,
                            amenities=amenities,
                            places=places)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
