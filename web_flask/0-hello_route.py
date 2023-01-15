@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Returns Hello HBNB!
+"""Falsk application that Returns Hello HBNB!
 """
 from flask import Flask
 
