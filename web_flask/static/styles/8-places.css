@@ -1,24 +1,21 @@
 .places{
     display: flex;
     flex-direction: column;
-    padding-left: 30px;
 }
 .places h1{
     font-size: 30px;
 }
 .places_title{
     padding-top: 30px;
-    margin-bottom: -25px;
 }
 .articles{
     display: flex;
-    align-items: baseline;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 30px
 }
 article{
-    width: 390px;
-    margin: 20px;
+    width: 420px;
     padding: 20px;
     border: solid #FF5A5F 1px;
     border-radius: 4px;
@@ -26,16 +23,14 @@ article{
     font-size: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 30px;
+    gap: 10px;
 }
 article h2{
     font-size: 30px;
-    margin-top: -1px;
-    padding-left: 20%;
 }
 .article_title{
     width: 100%;
+    text-align: left;
 }
 .price_by_night{
     color: #FF5A5F;
@@ -44,13 +39,16 @@ article h2{
     min-width: 60px;
     height: 60px;
     font-size: 25px;
-    margin-top: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.price{
-    margin-top: 15px;
-}
+
 .price_title{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
 }
 .information{
     height:80px;
@@ -66,6 +64,7 @@ article h2{
     height: inherit;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 .guest_icon{
     height: inherit;
@@ -85,6 +84,8 @@ article h2{
     height: inherit;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    align-items: center;
 }
 .rooms_icon{
     height: inherit;
